@@ -3,29 +3,22 @@ using System;
 class Word
 {
   public string StringWord;
+  public bool IsPalindrome;
 
   public Word(string word)
   {
     StringWord = word;
+    IsPalindrome = true;
   }
 
-  public bool isPalindrome()
+  public void PalindromeChecker()
   {
-    char[] arrayWord = StringWord.ToCharArray();
-    char[] reverseCopy = (char[]) arrayWord.Clone();
-
-    Array.Reverse(reverseCopy);
-
-    string stringWord = string.Join(",", arrayWord);    // Convert arrays into strings
-    string stringReverse = string.Join(",", reverseCopy);
-
-    if (stringWord == stringReverse)
+    for (int i = 0; i < StringWord.Length; i++)
     {
-      return true;
-    }
-    else
-    {
-      return false;
+      if (StringWord[i] != StringWord[StringWord.Length - 1 - i])
+      {
+        IsPalindrome = false;
+      }
     }
   }
 }
@@ -39,8 +32,9 @@ class Program
     string userWord = Console.ReadLine();
 
     Word newWord = new Word (userWord);
+    newWord.PalindromeChecker();
 
-    if (newWord.isPalindrome())
+    if (newWord.IsPalindrome)
     {
       Console.WriteLine("That's a palindrome!");
     }
